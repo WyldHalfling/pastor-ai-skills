@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 from pdf_utils import (
     NAVY, GOLD, BODY_COLOR, SLATE, MED_GRAY,
     build_styles, make_page_footer, create_doc, add_shaded_box,
+    add_church_footer, write_markdown, merge, load_profile,
 )
 from reportlab.platypus import Paragraph, Spacer, HRFlowable
 from reportlab.lib.styles import ParagraphStyle
@@ -57,6 +58,9 @@ def build_devotional_styles(base_styles):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         date = data.get("date", "devotional")
@@ -112,9 +116,12 @@ def generate_pdf(json_path, output_path=None):
     if data.get("pastor_name"):
         story.append(Paragraph(data["pastor_name"], styles["devo_signoff"]))
 
-    page_footer = make_page_footer("church")
+    add_church_footer(story, styles, profile)
+
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":

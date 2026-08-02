@@ -167,7 +167,7 @@ The brief organizes what the conversation surfaces. It is yours before I write i
 
 This skill is interactive. The brainstorm conversation comes first. The PDF is generated only after the conversation produces a clear brief.
 
-The final output is a formatted, REACHRIGHT-branded PDF, not terminal text. Requires `reportlab` (`pip install reportlab`).
+The final output is a formatted PDF, not terminal text. This is a desk document: your church name in the page footer, no contact banner. Both a PDF and its markdown source are written to `output/` (gitignored). Requires `reportlab` (`pip install reportlab`).
 
 ### Process
 

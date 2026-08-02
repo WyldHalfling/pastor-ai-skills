@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 from pdf_utils import (
     SLATE, RULE_GRAY,
     build_styles, section_header, add_title_banner,
-    add_reachright_footer, make_page_footer, create_doc,
+    write_markdown, merge, load_profile, make_page_footer, create_doc,
     add_bullet_list, add_shaded_box,
 )
 from reportlab.platypus import Paragraph, Spacer, HRFlowable
@@ -60,6 +60,9 @@ def add_agenda_item(story, item, styles):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         date = data.get("date", "agenda")
@@ -131,10 +134,10 @@ def generate_pdf(json_path, output_path=None):
         section_header(story, "Parking Lot", styles)
         add_bullet_list(story, data["parking_lot"], styles)
 
-    add_reachright_footer(story, styles)
-    page_footer = make_page_footer("reachright")
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":

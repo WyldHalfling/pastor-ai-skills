@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 
 from pdf_utils import (
     build_styles, section_header, add_title_banner,
-    add_reachright_footer, make_page_footer, create_doc,
+    add_church_footer, write_markdown, merge, load_profile, make_page_footer, create_doc,
     add_shaded_box, add_bullet_list,
 )
 from reportlab.platypus import Paragraph, Spacer
@@ -25,6 +25,9 @@ def add_numbered_questions(story, questions, styles, start_num=1):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         passage = data.get("passage", "guide")
@@ -84,10 +87,11 @@ def generate_pdf(json_path, output_path=None):
         story.append(Paragraph("OPTIONAL CHALLENGE", styles["body_label"]))
         story.append(Paragraph(data["optional_challenge"], styles["body_content"]))
 
-    add_reachright_footer(story, styles)
-    page_footer = make_page_footer("reachright")
+    add_church_footer(story, styles, profile)
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":

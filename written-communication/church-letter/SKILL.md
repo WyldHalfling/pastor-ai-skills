@@ -168,7 +168,7 @@ The goal is not a perfect letter. The goal is a letter your congregation can rec
 
 ## Output Format
 
-This skill outputs a formatted PDF document with church letterhead, not terminal text. The PDF includes the church name as a centered letterhead, a gold accent line, the dated and addressed letter body in justified type, and a pastor signature block. This is a church-branded document with no REACHRIGHT branding.
+This skill outputs a formatted PDF document with church letterhead, not terminal text. The PDF includes the church name as a centered letterhead, a gold accent line, the dated and addressed letter body in justified type, and a pastor signature block. Congregation-facing: the church contact banner closes the letter.
 
 ### Requirements
 
@@ -211,6 +211,6 @@ Structure the letter into this exact format before generating the PDF.
 **Important notes on the JSON:**
 - `framing_note` and `flags` do not appear in the PDF. They are for the pastor's reference only.
 - `body` is a plain text string. Separate paragraphs with double newlines (`\n\n`).
-- This is a church-branded document. No REACHRIGHT branding appears anywhere in the output.
+- Letterhead and contact details come from `church-profile.md`. No agency or vendor branding appears anywhere in the output.
 - Use the pastor's real name, title, and church name from the foundation variables, not placeholders.
 - Do not use em dashes anywhere in the content. Use commas, colons, or periods instead.

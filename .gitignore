@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 *.pdf
+
+# Generated documents (sermon prep, letters, agendas) stay local
+output/

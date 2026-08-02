@@ -157,7 +157,7 @@ Before delivering the guide, verify:
 
 ## PDF Output
 
-The final output is a formatted, REACHRIGHT-branded PDF, not terminal text. Requires `reportlab` (`pip install reportlab`).
+The final output is a formatted PDF with your church's letterhead, not terminal text. This is a congregation-facing document: group leaders hand it around. Both a PDF and its markdown source are written to `output/` (gitignored). Requires `reportlab` (`pip install reportlab`).
 
 ### Process
 

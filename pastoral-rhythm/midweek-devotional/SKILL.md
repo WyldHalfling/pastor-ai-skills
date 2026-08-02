@@ -142,7 +142,7 @@ Write the devotional content to a JSON file, then run `generate-pdf.py` to produ
 - `church_name` and `pastor_name` come from the pastor-foundation skill.
 - `reflection` uses `\n\n` to separate paragraphs.
 - No section headers appear in the PDF. The layout flows as one continuous piece.
-- The PDF is church-branded (no REACHRIGHT branding). Footer shows only a thin gray rule and page number.
+- Congregation-facing branding: the church contact banner closes the document and the church name sits in the page footer. Both are pulled from `church-profile.md` and are skipped entirely if those fields are unfilled.
 
 **Usage:**
 

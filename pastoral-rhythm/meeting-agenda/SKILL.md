@@ -209,7 +209,7 @@ If you are not sure what belongs on the agenda, list everything on your mind and
 
 ## Output Format
 
-After building the agenda, generate a JSON file matching this schema and pass it to `generate-pdf.py` to produce a REACHRIGHT-branded PDF.
+After building the agenda, generate a JSON file matching this schema and pass it to `generate-pdf.py`. This is a desk document: church name in the page footer, no contact banner.
 
 ```json
 {

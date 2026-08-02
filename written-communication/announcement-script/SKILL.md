@@ -103,7 +103,7 @@ Output is a **branded single-page PDF** designed to be printed and handed to the
 5. **Script body** in readable serif type. Delivery cues written as `[pause]` in the JSON render as *(pause)* in italic slate color inline.
 6. **Divider** (thin gray rule)
 7. **Bumped items section:** "For the Bulletin / Slides / Email" header with bullet list of items that did not make the spoken cut
-8. **Footer:** thin gray rule with page number only (no REACHRIGHT branding)
+8. **Footer:** gold rule with the church name and page number
 
 ### JSON Schema
 
@@ -129,7 +129,7 @@ Save the structured output as JSON matching this schema, then run `python genera
 - `script_body` -- Use `[brackets]` for delivery cues (e.g., `[pause]`, `[smile]`, `[point to screen]`). They render as italic colored text in the PDF. Separate paragraphs with double newlines (`\n\n`).
 - `bumped_items` -- Announcements that did not make the spoken script. Each has an `item` name and a one-line `summary` with key logistics.
 - `deliverer` and `tone_notes` are optional. If omitted, those lines are skipped in the PDF.
-- The PDF is church-branded (no REACHRIGHT footer).
+- Desk document. Nobody reads the footer of a script they are reading aloud, so there is no contact banner.
 
 ---
 

@@ -1,3 +1,14 @@
+> **SUPERSEDED — historical record only.**
+>
+> This document is from the upstream fork and describes the original REACHRIGHT-branded
+> PDF design. That branding has been removed. Documents now carry church letterhead
+> from `church-profile.md`, or nothing.
+>
+> Do not follow this document. Current authority:
+> `.ai/guidelines/skill-standards.md` and `.ai/guidelines/project-guidelines.md`.
+
+---
+
 # Skill PDF Upgrades Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.

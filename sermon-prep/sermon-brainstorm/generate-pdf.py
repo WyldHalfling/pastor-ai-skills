@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 
 from pdf_utils import (
     build_styles, section_header, add_title_banner,
-    add_reachright_footer, make_page_footer, create_doc,
+    write_markdown, merge, load_profile, make_page_footer, create_doc,
     add_bullet_list, add_shaded_box,
 )
 from reportlab.platypus import Paragraph, Spacer
@@ -26,6 +26,9 @@ def add_brief_field(story, label, content, styles):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         passage = data.get("passage", "brief")
@@ -75,10 +78,10 @@ def generate_pdf(json_path, output_path=None):
     )]
     add_shaded_box(story, closing, styles)
 
-    add_reachright_footer(story, styles)
-    page_footer = make_page_footer("reachright")
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":

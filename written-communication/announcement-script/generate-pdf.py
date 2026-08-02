@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 from pdf_utils import (
     NAVY, GOLD, BODY_COLOR, SLATE, MED_GRAY,
     build_styles, make_page_footer, create_doc, add_bullet_list,
+    write_markdown, merge, load_profile,
 )
 from reportlab.platypus import Paragraph, HRFlowable
 from reportlab.lib.styles import ParagraphStyle
@@ -55,6 +56,9 @@ def format_script_text(text):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         date = data.get("date", "script")
@@ -113,9 +117,10 @@ def generate_pdf(json_path, output_path=None):
             items.append(f"<b>{item_name}:</b> {summary}")
         add_bullet_list(story, items, styles)
 
-    page_footer = make_page_footer("church")
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":

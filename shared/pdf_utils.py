@@ -16,6 +16,12 @@ from reportlab.platypus import (
     HRFlowable
 )
 
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from church_profile import load_profile, merge  # noqa: E402,F401  (re-exported)
+
 
 # --- Color Palette ---
 # Editorial study-bible aesthetic: deep navy + warm gold accent
@@ -107,7 +113,11 @@ def build_styles():
         leading=12, textColor=NAVY,
     )
 
-    # --- REACHRIGHT banner styles (white on navy) ---
+    # --- Church contact banner styles (white on navy) ---
+    s["brand_name"] = ParagraphStyle(
+        "BrandName", fontName="Helvetica-Bold", fontSize=11, leading=15,
+        textColor=WHITE, spaceAfter=3,
+    )
     s["brand_body"] = ParagraphStyle(
         "BrandBody", fontName="Helvetica", fontSize=9, leading=13,
         textColor=HexColor("#C8D6E5"),
@@ -284,20 +294,41 @@ def add_title_banner(story, title_text, subtitle_text, meta_parts, styles):
     ))
 
 
-# --- REACHRIGHT Branding Banner ---
+# --- Church Contact Banner ---
 
-def add_reachright_footer(story, styles):
-    """Add REACHRIGHT branding as a navy banner at the end."""
-    story.append(Spacer(1, 30))
+def add_church_footer(story, styles, profile=None):
+    """Add the church's contact block as a navy banner at the end.
+
+    Used on congregation-facing documents (letters, devotionals, announcement
+    scripts, small group guides) so they read as letterhead.
+
+    The banner is skipped entirely when the profile has no letterhead fields
+    filled in. A half-empty contact block looks worse than none.
+    """
+    profile = load_profile() if profile is None else profile
+
+    tagline = profile.get("CHURCH_TAGLINE")
+    address = profile.get("CHURCH_ADDRESS")
+    times = profile.get("SERVICE_TIMES")
+    website = profile.get("CHURCH_WEBSITE")
+    name = profile.get("CHURCH_NAME")
+
+    if not any([tagline, address, times, website]):
+        return
 
     brand_content = []
-    brand_content.append(Paragraph(
-        "Built by REACHRIGHT. We help churches get found online: custom websites, "
-        "Google Ad Grants, local SEO, and social media done for you. "
-        "If this tool saved you time this week, we can save you a lot more.",
-        styles["brand_body"]
-    ))
-    brand_content.append(Paragraph("reachrightstudios.com", styles["brand_url"]))
+    if name:
+        brand_content.append(Paragraph(name, styles["brand_name"]))
+    if tagline:
+        brand_content.append(Paragraph(tagline, styles["brand_body"]))
+
+    detail_parts = [p for p in (times, address) if p]
+    if detail_parts:
+        brand_content.append(Paragraph("  |  ".join(detail_parts), styles["brand_body"]))
+    if website:
+        brand_content.append(Paragraph(website, styles["brand_url"]))
+
+    story.append(Spacer(1, 30))
 
     banner = Table(
         [[brand_content]],
@@ -318,52 +349,95 @@ def add_reachright_footer(story, styles):
 
 # --- Page Footer (canvas callback factory) ---
 
-def make_page_footer(brand="reachright"):
+def make_page_footer(brand="church", profile=None):
     """Return a canvas callback for page footers.
 
     Args:
-        brand: "reachright" for gold rule + "Powered by REACHRIGHT" + page number.
-               "church" for thin gray rule + page number only.
+        brand: "church" for a gold rule + church name on the left + page number.
+               "plain" for a thin gray rule + page number only. Use "plain" on
+               documents where a repeated church name would read as clutter.
+        profile: Optional pre-loaded profile dict.
     """
+    profile = load_profile() if profile is None else profile
+    church_name = profile.get("CHURCH_NAME", "")
+
     def _footer(canvas_obj, doc):
         canvas_obj.saveState()
         page_width = letter[0]
         margin = 1.0 * inch
 
-        if brand == "reachright":
+        if brand == "church":
             # Thin gold rule
             canvas_obj.setStrokeColor(GOLD)
             canvas_obj.setLineWidth(0.5)
             canvas_obj.line(margin, 0.6 * inch, page_width - margin, 0.6 * inch)
 
-            # "Powered by REACHRIGHT" left
             canvas_obj.setFont("Helvetica", 7)
             canvas_obj.setFillColor(MED_GRAY)
-            canvas_obj.drawString(margin, 0.42 * inch, "Powered by REACHRIGHT")
-
-            # Page number right
-            page_num = canvas_obj.getPageNumber()
-            canvas_obj.drawRightString(
-                page_width - margin, 0.42 * inch, f"Page {page_num}"
-            )
-
-        elif brand == "church":
+            if church_name:
+                canvas_obj.drawString(margin, 0.42 * inch, church_name)
+        else:
             # Thin gray rule
             canvas_obj.setStrokeColor(RULE_GRAY)
             canvas_obj.setLineWidth(0.5)
             canvas_obj.line(margin, 0.6 * inch, page_width - margin, 0.6 * inch)
 
-            # Page number right only
             canvas_obj.setFont("Helvetica", 7)
             canvas_obj.setFillColor(MED_GRAY)
-            page_num = canvas_obj.getPageNumber()
-            canvas_obj.drawRightString(
-                page_width - margin, 0.42 * inch, f"Page {page_num}"
-            )
+
+        # Page number right, both modes
+        page_num = canvas_obj.getPageNumber()
+        canvas_obj.drawRightString(
+            page_width - margin, 0.42 * inch, f"Page {page_num}"
+        )
 
         canvas_obj.restoreState()
 
     return _footer
+
+
+# --- Output Location ---
+
+def output_dir():
+    """Return the directory generated documents belong in, creating it if needed.
+
+    Defaults to `./output` relative to the working directory, which is gitignored so
+    sermon prep and church letters never land in a commit. Override with
+    $PASTOR_OUTPUT_DIR.
+    """
+    target = os.environ.get("PASTOR_OUTPUT_DIR") or os.path.join(os.getcwd(), "output")
+    target = os.path.expanduser(target)
+    os.makedirs(target, exist_ok=True)
+    return target
+
+
+def resolve_output_path(path):
+    """Place a bare filename inside the output directory; leave real paths alone.
+
+    `resolve_output_path("Letter.pdf")`      -> ./output/Letter.pdf
+    `resolve_output_path("~/Desk/Out.pdf")`  -> /home/you/Desk/Out.pdf
+    """
+    path = os.path.expanduser(path)
+    if os.path.dirname(path):
+        parent = os.path.dirname(os.path.abspath(path))
+        os.makedirs(parent, exist_ok=True)
+        return path
+    return os.path.join(output_dir(), path)
+
+
+def write_markdown(pdf_path, markdown):
+    """Write the document's markdown source next to its PDF.
+
+    Every skill emits both: the PDF for handing out, the markdown for pasting into
+    email, a slide, or next week's file. Returns the markdown path, or None if
+    nothing was passed.
+    """
+    if not markdown:
+        return None
+    md_path = os.path.splitext(pdf_path)[0] + ".md"
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write(markdown.rstrip() + "\n")
+    return os.path.abspath(md_path)
 
 
 # --- Document Creation ---
@@ -371,7 +445,8 @@ def make_page_footer(brand="reachright"):
 def create_doc(output_path, title="", author=""):
     """Create and return a SimpleDocTemplate with standard layout.
 
-    Letter size, 1" side margins, 0.85" top/bottom margins.
+    Letter size, 1" side margins, 0.85" top/bottom margins. A bare filename is
+    routed into the output directory; see resolve_output_path.
 
     Args:
         output_path: File path for the PDF.
@@ -381,6 +456,7 @@ def create_doc(output_path, title="", author=""):
     Returns:
         A SimpleDocTemplate instance.
     """
+    output_path = resolve_output_path(output_path)
     return SimpleDocTemplate(
         output_path,
         pagesize=letter,

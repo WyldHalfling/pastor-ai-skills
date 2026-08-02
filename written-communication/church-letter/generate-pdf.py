@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(_here, "..", "..", "shared"))
 from pdf_utils import (
     NAVY, GOLD, BODY_COLOR,
     build_styles, make_page_footer, create_doc,
+    add_church_footer, write_markdown, merge, load_profile,
 )
 from reportlab.platypus import Paragraph, HRFlowable
 from reportlab.lib.styles import ParagraphStyle
@@ -49,6 +50,9 @@ def build_letter_styles(base_styles):
 def generate_pdf(json_path, output_path=None):
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    profile = load_profile()
+    data = merge(data, profile)
 
     if not output_path:
         date = data.get("date", "letter")
@@ -93,9 +97,12 @@ def generate_pdf(json_path, output_path=None):
     if data.get("church_name"):
         story.append(Paragraph(data["church_name"], styles["signature_title"]))
 
-    page_footer = make_page_footer("church")
+    add_church_footer(story, styles, profile)
+
+    page_footer = make_page_footer("church", profile)
     doc.build(story, onFirstPage=page_footer, onLaterPages=page_footer)
-    return os.path.abspath(output_path)
+    write_markdown(doc.filename, data.get("markdown"))
+    return os.path.abspath(doc.filename)
 
 
 if __name__ == "__main__":
