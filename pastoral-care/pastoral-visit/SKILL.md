@@ -17,11 +17,28 @@ Ten minutes of preparation before you walk in.
 **Do not give a name.** Use a role or initials. This skill works entirely from the
 situation.
 
+**Know where the line actually is.** Everything typed here reaches Anthropic. Not
+committing it and not writing it to disk protects the repo, not the request. Whatever
+you type about this person leaves your machine and cannot be pulled back, and clergy
+confidentiality does not cross that boundary with it. That is the real reason this skill
+asks for a situation instead of a person: it is the only protection that operates before
+the data leaves.
+
+Strip the identifying detail going in, not coming out. A rare diagnosis, a job title in
+a town this size, or a specific family configuration names someone as surely as a name
+does.
+
 Nothing from this skill is written to disk unless you explicitly ask. Nothing about
 the person is ever searched for online. If you paste in details that identify someone,
-they will be used for this conversation and will not appear in any generated file.
+they will be used for this conversation and will not appear in any generated file, and
+you will be told plainly that they crossed the wire.
 
 If a name appears in something you ask to be saved, it will be replaced with initials.
+
+**Some conversations do not belong here at all.** A confession given under seal, an
+active abuse disclosure, or anything carrying legal exposure for a person or the church
+gets prepared for on paper or with a colleague. This skill will say so rather than take
+the input.
 
 ---
 

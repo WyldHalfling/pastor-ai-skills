@@ -1,6 +1,6 @@
 ---
 name: midweek-devotional
-description: Write a short midweek devotional (200-300 words) to send via email or app. Scripture-based, personal, warm. Keeps the congregation connected between Sundays.
+description: Write a short midweek devotional (200-300 words) to send via email or app. Scripture-based, warm, congregation-facing. Keeps the congregation connected between Sundays. Tier 3 with a Tier 2 limit - drafts fully, but never claims the pastor's own experience of the passage.
 ---
 
 # Midweek Devotional
@@ -8,6 +8,31 @@ description: Write a short midweek devotional (200-300 words) to send via email 
 A pastoral moment for the middle of the week.
 
 > Requires: pastor-foundation skill
+> **Tier 3, with a Tier 2 limit.** It drafts the whole devotional. It never writes as
+> though it has sat with the text, prayed over it, or lived the week he is living.
+
+---
+
+## The Limit
+
+This goes out under the pastor's name to people who will read it as his own devotional
+life. Drafting it is fine. Claiming his experience of the passage is not.
+
+**Never write:** "I have been sitting with this passage all week." "This verse found me
+on Tuesday." "I keep coming back to this one." "God has been teaching me something
+about..." Any sentence asserting something happened to him that you cannot know
+happened.
+
+**First person is still fine**, and still encouraged, in the register of a pastor
+thinking alongside the reader rather than reporting a private history: "We forget by
+Wednesday." "I do not think this text lets us off that easily." "None of us can carry
+this on our own."
+
+The line is between a pastor reasoning in public, which you may draft, and a pastor
+testifying to his own week, which he writes himself.
+
+If the passage genuinely calls for a personal story, say so and leave the space empty.
+Do not invent the story.
 
 ---
 
@@ -50,7 +75,7 @@ Quote it cleanly. No verse-by-verse breakdown. Let the text breathe.
 
 This is the heart of the devotional.
 
-Write in first person. Write as a pastor who has been sitting with this text for days, not someone summarizing a commentary. What does this passage mean for THIS week, in THIS moment, for people carrying real weight?
+First person is fine. Write in the register of a pastor thinking alongside the reader, not one reporting his own week with the text. See The Limit above: no claimed history with the passage, no invented story. What does this passage mean for THIS week, in THIS moment, for people carrying real weight?
 
 Be specific. Vague spiritual encouragement does nothing. Anchor the reflection to something concrete: a feeling, a situation, a tension people are actually navigating.
 
@@ -92,6 +117,7 @@ Do not end with a sign-off like "Have a blessed week!" or "In His grace." Just l
 
 Avoid these. They will kill the devotional.
 
+- Never claim the pastor's experience of the passage. No "I have been sitting with this all week," no invented story, no private history with God he did not report. This is the one hard limit on this skill. See The Limit above.
 - Never exceed 300 words. Brevity is pastoral care. Long devotionals get skimmed or deleted.
 - Never turn this into a sermon. One insight. One takeaway. That is enough.
 - Never use the devotional to promote events, announcements, or campaigns.
@@ -115,6 +141,11 @@ If the input includes a current sermon series, weave in a single line of connect
 If the input includes a community event or current moment on people's minds, let it inform the opening or reflection. Ground the text in the world the reader is actually living in.
 
 Word count check before finalizing: if it exceeds 300 words, cut from the reflection first, then the closing. The opening and takeaway are the last things to trim.
+
+Limit check before finalizing: read the reflection back and ask whether any sentence
+asserts something about the pastor's week, prayer life, or history with this passage. If
+one does, rewrite it or hand it back to him as a gap. This is a draft going out under
+his name, not a report of his soul.
 
 ### PDF Generation
 

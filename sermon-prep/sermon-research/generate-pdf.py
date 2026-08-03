@@ -144,6 +144,48 @@ def add_theological_themes(story, themes, styles):
         story.append(Spacer(1, 8))
 
 
+def add_verify_before_use(story, items, styles):
+    """Add the unverified-attribution checklist in a shaded container.
+
+    Every claim in Commentary Insights that is attached to a named scholar lands here.
+    This skill has no commentaries open; it reconstructs positions from training data
+    and a wrong attribution reads exactly like a right one. Confirm each of these in
+    Logos, Blue Letter Bible, or print before it reaches a pulpit or anything published.
+    """
+    section_header(story, "Verify Before Use", styles)
+
+    lead = (
+        "Each item below is attached to a named scholar and is <b>unverified</b>. "
+        "Confirm it in the source before it reaches a pulpit, a class, or anything "
+        "published. If you cannot confirm one, preach the position without the name."
+    )
+    story.append(Paragraph(lead, styles["body"]))
+
+    if not items:
+        story.append(Paragraph(
+            "No named attributions were made for this passage. Nothing to check.",
+            styles["body"]
+        ))
+        return
+
+    check_elements = []
+    for item in items:
+        claim = item.get("claim", "") if isinstance(item, dict) else str(item)
+        source = item.get("source", "") if isinstance(item, dict) else ""
+        where = item.get("where_to_check", "") if isinstance(item, dict) else ""
+
+        line = f"<b>{source}</b>  {claim}" if source else claim
+        # "[ ]" not a ballot-box glyph: the standard Type1 fonts are Latin-1 and
+        # U+2610 renders as a black box.
+        check_elements.append(Paragraph(f"[ ]  {line}", styles["prompt"]))
+        if where:
+            check_elements.append(Paragraph(
+                f"<i>Check: {where}</i>", styles["prompt"]
+            ))
+
+    add_shaded_box(story, check_elements, styles)
+
+
 def add_thinking_prompts(story, prompts, styles):
     """Add thinking prompts inside a shaded container with gold left border."""
     section_header(story, "Thinking Prompts", styles)
@@ -216,6 +258,9 @@ def generate_pdf(json_path, output_path=None):
             story, "Commentary Insights",
             data["commentary_insights"], styles
         )
+        # Always renders when there are commentary insights, even with an empty list.
+        # "Nothing to check" is information; a silently missing section is not.
+        add_verify_before_use(story, data.get("verify_before_use", []), styles)
 
     if data.get("cross_references"):
         add_cross_references(story, data["cross_references"], styles)
