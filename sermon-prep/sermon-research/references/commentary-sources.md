@@ -58,6 +58,19 @@ These are platforms and tools that aggregate multiple commentaries or provide or
 
 ## How This Skill Uses These Sources
 
-The sermon-research skill draws on the positions and insights of commentators from these series when summarizing commentary insights for a passage. It does not fabricate direct quotes. When a commentator's position is cited by name, it reflects that scholar's documented interpretive stance.
+**Read this part before you quote anything from the pulpit.**
 
-If you have access to specific commentaries through Logos, Blue Letter Bible, or print, reading the original source after reviewing the research summary is always worth the time. The goal of this reference document is to give you a map so you know what is out there and where to go deeper.
+The sermon-research skill does not have these books open. It has no copy of WBC, NICNT, BECNT, or any other volume listed above. It is reconstructing what it absorbed about these commentators during training, and that reconstruction is confident whether or not it is correct.
+
+What that means in practice:
+
+- **Every named attribution is a lead, not a citation.** "Carson argues X" from this skill means "it is worth checking whether Carson argues X." It does not mean Carson argues X.
+- **The failure mode is not obvious.** A fabricated attribution does not look fabricated. It looks like the other ones. You cannot spot it by reading carefully; you can only spot it by checking the source.
+- **The risk rises with specificity.** A broad characterization of a series is usually safe. A specific claim attached to a specific scholar on a specific verse is where this goes wrong.
+- **Positions are more reliable than people.** "Interpreters split on whether this is X or Y" is generally sound. "Fee takes X and Dunn takes Y" is the part to verify.
+
+**Before a named attribution reaches a pulpit, a bulletin, a blog post, or a class, open the source and confirm it.** Blue Letter Bible and Bible Hub are free and cover a lot of this. Logos or a print volume covers the rest. If you cannot confirm it, preach the position without the name. The insight is usually still good. The attribution is what gets you in trouble.
+
+`project-guidelines.md` calls inventing a source a fireable offense in a pulpit. That is the right standard, and this skill cannot enforce it on its own. You are the check.
+
+The goal of this reference document is to give you a map of what is out there and where to go verify.

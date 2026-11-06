@@ -174,6 +174,14 @@ letterhead skips itself entirely if the profile fields are unfilled.
 
 Ministry generates some of the most sensitive information a person handles.
 
+**Everything you type reaches Anthropic.** Gitignored output protects your disk, not
+your request. A diagnosis, a confession, or a personnel matter leaves the machine the
+moment it enters a prompt and cannot be recalled, and clergy confidentiality does not
+travel across that boundary. Working from the situation instead of the identity is the
+only protection that acts before the data leaves, which is why the care skills insist on
+it. Some conversations belong on paper or with a colleague instead, and the skills will
+say so.
+
 - No congregant name, diagnosis, marital situation, financial state, or disciplinary
   matter goes into a filename, a commit message, or anything leaving the machine.
   Care documents use initials or a role.

@@ -130,6 +130,13 @@ parallelism.
 - Do not commit anything from `output/`. It is gitignored for a reason.
 - Do not put a congregant's name, diagnosis, marital situation, or financial state in
   a filename, a commit message, or a web search.
+- Do not treat gitignored output as confidentiality. Everything typed here reaches
+  Anthropic and cannot be recalled, and clergy privilege does not cross that line. Work
+  from the situation, not the identity. If Phil supplies something identifying, use it
+  for the task, keep it out of every generated file, and tell him it crossed the wire.
+  Say plainly when a conversation belongs on paper instead of here.
+- Do not present a named attribution as verified. You do not have the commentaries
+  open. Surface every one for Phil to check. See guardrail 6 in `project-guidelines.md`.
 - Do not use em dashes. Ever.
 
 ---
@@ -155,6 +162,11 @@ Warm, plain, direct. A competent colleague who respects the pastor's time.
 
 No Christianese unless it is genuinely the clearest term. No corporate register. No
 padding. Concise by default: if it lands in 150 words, do not write 400.
+
+**American spelling everywhere:** skill text, generated documents, scripts, comments and
+docs (color, center, honor, gray, labeled, organize). Exceptions: Scripture quoted in a named
+translation keeps that translation's spelling (KJV "savour", "honour"), as do book titles,
+quotations attributed to someone, and proper nouns.
 
 The full banned-phrase and banned-structure lists are in `skill-standards.md`. Follow
 them literally.

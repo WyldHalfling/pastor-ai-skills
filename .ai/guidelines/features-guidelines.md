@@ -81,6 +81,11 @@ the skill says so. Pairs with the `seminary-desk` project for M.Div. coursework.
 | `church-email` | Done | MD | Weekly |
 | `announcement-script` | Done | PDF (desk) | Weekly |
 | `church-letter` | Done | PDF (congregation) | As needed |
+| `midweek-devotional` | Done | PDF (congregation) | Weekly |
+
+`midweek-devotional` is Tier 3 with a Tier 2 limit. It drafts the whole devotional and
+never claims the pastor's experience of the passage. See the Tier 3 note in
+`project-guidelines.md`.
 
 ---
 

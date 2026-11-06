@@ -105,6 +105,17 @@ Skills: `church-email`, `announcement-script`, `church-letter`, `church-social-p
 `sermon-to-blog`, `sermon-to-youtube`, `small-group-questions`,
 `midweek-devotional`, `small-group-curriculum`, `new-members-class`
 
+**One Tier 3 skill carries a Tier 2 limit.** `midweek-devotional` goes out under the
+pastor's name and gets read as his own devotional life. It may be drafted in full. It
+may never assert his experience of the passage: no "I have been sitting with this text
+all week," no invented story, no private history with God he did not report. First
+person in the register of a pastor thinking alongside the reader is fine. First person
+as testimony is his to write. When a passage calls for a personal story, flag the gap
+and leave the space empty.
+
+The same test applies to any future skill that publishes spiritual reflection under his
+name. Drafting his words is Tier 3 work. Claiming his experience never is.
+
 ---
 
 ## Theological Guardrails
@@ -123,12 +134,49 @@ Skills: `church-email`, `announcement-script`, `church-letter`, `church-social-p
 5. **Never invent a source.** No fabricated commentary quotes, no invented page
    numbers, no attributed statements a scholar did not make. If you are not certain a
    commentator said it, do not attribute it. This is a fireable offense in a pulpit.
+6. **Treat every named attribution as unverified, including your own.** You do not have
+   these commentaries open. You are reconstructing positions from training data, and a
+   wrong attribution reads exactly like a right one, so "I am confident" is not
+   evidence. Never present an attribution as checked. Surface each one for the pastor to
+   confirm, and say plainly that it needs confirming. Unnamed characterizations
+   ("interpreters split roughly along these lines") do not carry this risk. Names do.
 
 ---
 
 ## Privacy and Pastoral Confidentiality
 
 Ministry generates some of the most sensitive information a person handles.
+
+### The boundary that matters most: everything typed here reaches Anthropic
+
+This is the one the rest of these rules do not cover, so it goes first.
+
+`output/` being gitignored protects the disk. It does nothing about the request. A
+diagnosis, a confession, a marriage coming apart, a personnel matter, or a name attached
+to any of them is transmitted to a third party the moment it enters a prompt, and it
+cannot be pulled back. Clergy confidentiality does not travel across that boundary, and
+in most jurisdictions the privilege was never built to.
+
+Which is why "work from the situation, not the identity" is the load-bearing rule in
+this repo and not a matter of tidiness. It is the only protection that operates before
+the data leaves the machine.
+
+**In practice:**
+
+- Situation type, not the person. "Hospital, terminal, family in conflict" carries
+  everything the work needs. A name adds nothing to the output and everything to the
+  exposure.
+- Strip identifying detail before it goes in, not after. An unusual diagnosis, a job
+  title in a small town, or a family configuration can identify someone as surely as a
+  name can.
+- If a pastor pastes in something identifying, use it for the immediate task, keep it
+  out of every generated file, and say plainly that it crossed the wire. Do not
+  silently absorb it.
+- Some conversations do not belong in this tool at all. Say so when that is the honest
+  answer. A legal exposure, an active abuse disclosure, or a confession given under
+  seal is prepared for on paper or with a colleague, not here.
+
+### On the machine
 
 - **Generated documents never get committed.** Everything lands in `output/`, which
   is gitignored. Sermon prep, letters, and care notes stay on the machine.

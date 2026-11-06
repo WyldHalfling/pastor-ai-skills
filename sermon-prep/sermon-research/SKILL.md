@@ -87,9 +87,15 @@ I will draw from 3-5 commentators or theological traditions, covering:
 - Where they diverge. Disagreement usually marks a genuine tension in the text, not just a matter of preference.
 - Academic and pastoral perspectives. Technical commentaries ask different questions than preaching commentaries. Both are useful.
 
-I will name the commentators I am drawing from. I will not fabricate quotes. I will summarize their positions accurately. If a passage is interpretively contested, I will tell you that directly rather than picking a side for you.
+I will name the commentators I am drawing from. I will not fabricate quotes. If a passage is interpretively contested, I will tell you that directly rather than picking a side for you.
 
-See `references/commentary-sources.md` for the full list of sources this skill draws on, with descriptions and access information.
+**Treat every named attribution as unverified.** This skill does not have these commentaries open. It is working from training data, and it will attach a position to a named scholar with the same confidence whether the attribution is right or wrong. A fabricated one does not read differently from a real one.
+
+So the Commentary Insights section closes with a short **Verify Before Use** list: every claim in it that is attached to a named person, so you know exactly what to check and what you can leave alone. Confirm those in Logos, Blue Letter Bible, or print before any of them reaches a pulpit, a class, or anything published. If you cannot confirm one, preach the position without the name. The insight usually survives. The attribution is the liability.
+
+Unnamed characterizations ("interpreters generally split along these lines") do not need to go on that list. Named ones always do.
+
+See `references/commentary-sources.md` for the source list, access information, and the fuller explanation of why this check exists.
 
 ---
 
@@ -194,6 +200,13 @@ Structure the research into this exact format before generating the PDF. Every f
     }
   ],
   "commentary_insights": "Full text of the Commentary Insights section. Use double line breaks to separate paragraphs.",
+  "verify_before_use": [
+    {
+      "source": "Douglas Moo, Romans (NICNT)",
+      "claim": "Reads 'the law of the Spirit of life' as the Spirit's governing power rather than the Mosaic law repurposed.",
+      "where_to_check": "NICNT Romans, comment on 8:2. Logos or print."
+    }
+  ],
   "cross_references": [
     {
       "reference": "Galatians 5:16-25",
@@ -218,6 +231,7 @@ Structure the research into this exact format before generating the PDF. Every f
 **Important notes on the JSON:**
 - `passage_context`, `historical_background`, and `commentary_insights` are plain text strings. Separate paragraphs with double newlines (`\n\n`).
 - `word_studies` is an array of objects. Include 3-5 entries matching the words identified in Step 3.
+- `verify_before_use` holds one object per named attribution made anywhere in `commentary_insights`. Every claim tied to a specific scholar goes here, with `source`, `claim`, and `where_to_check`. If no named attributions were made, pass an empty array: the section still renders and says there is nothing to check. Never omit a named attribution from this list to keep it short.
 - `cross_references` uses three type values: "Direct parallel", "Thematic connection", or "OT background".
 - `theological_themes` is an array of 3-5 theme objects.
 - `thinking_prompts` is an array of 5-7 question strings.
@@ -233,6 +247,7 @@ This skill will not do the following, even if you ask:
 - **No sermon outline or structure.** Research is research. Structure comes in your prep, not here.
 - **No three-point frameworks.** The AI will not suggest how to organize the sermon.
 - **No fabricated quotes.** If a commentator's exact words are not available, the AI summarizes the position. It does not invent a quotation to make a point sound more authoritative.
+- **No attribution presented as verified.** The AI cannot confirm that a named scholar holds the position attached to their name. It says so, lists every one of them in Verify Before Use, and never implies the checking has already been done.
 - **No over-spiritualized history.** The Roman census was a political act. The Temple Mount was a real place with real economic activity. Historical context is not a metaphor. This skill reads it plainly before asking what it means theologically.
 
 ---
