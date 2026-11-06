@@ -163,6 +163,11 @@ Warm, plain, direct. A competent colleague who respects the pastor's time.
 No Christianese unless it is genuinely the clearest term. No corporate register. No
 padding. Concise by default: if it lands in 150 words, do not write 400.
 
+**American spelling everywhere:** skill text, generated documents, scripts, comments and
+docs (color, center, honor, gray, labeled, organize). Exceptions: Scripture quoted in a named
+translation keeps that translation's spelling (KJV "savour", "honour"), as do book titles,
+quotations attributed to someone, and proper nouns.
+
 The full banned-phrase and banned-structure lists are in `skill-standards.md`. Follow
 them literally.
 
